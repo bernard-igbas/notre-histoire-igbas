@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notre Histoire — Méthode 3+1 IGBas®</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0f2035;
+    --teal: #1e6b5e;
+    --teal-light: #2a8a79;
+    --gold: #c9a96e;
+    --cream: #f9f5ef;
+    --white: #ffffff;
+    --text-dark: #1a1a2e;
+    --text-mid: #4a5568;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Lato', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+    font-size: 18px; /* base augmentée */
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: var(--navy);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 60px 24px;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(30,107,94,0.25) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -150px; left: -150px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(201,169,110,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 0.95rem; /* était 0.8 */
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-weight: 700;
+    color: var(--white);
+    text-align: center;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.4s;
+  }
+
+  .hero-title em { font-style: italic; color: var(--gold); }
+
+  .hero-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(1.15rem, 2.5vw, 1.45rem); /* était 1rem/1.3 */
+    color: rgba(255,255,255,0.7); /* légèrement plus visible */
+    text-align: center;
+    max-width: 540px;
+    line-height: 1.6;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.6s;
+  }
+
+  .hero-quote {
+    border-left: 2px solid var(--gold);
+    padding: 20px 28px;
+    max-width: 560px;
+    margin-bottom: 56px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.8s;
+  }
+
+  .hero-quote p {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.15rem; /* était 1.05 */
+    color: rgba(255,255,255,0.9); /* plus lisible */
+    line-height: 1.75;
+    margin-bottom: 10px;
+  }
+
+  .hero-quote cite {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.88rem; /* était 0.78 */
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .scroll-cue {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 1s;
+  }
+
+  .scroll-cue span {
+    font-size: 0.82rem; /* était 0.72 */
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollLine 2s ease-in-out infinite;
+  }
+
+  /* TIMELINE */
+  .timeline-section {
+    padding: 100px 24px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 0.9rem; /* était 0.75 */
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 64px;
+    text-align: center;
+  }
+
+  .timeline { position: relative; }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 28px;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--teal), rgba(30,107,94,0.15));
+  }
+
+  .timeline-item {
+    display: flex;
+    gap: 48px;
+    margin-bottom: 72px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .timeline-item.visible { opacity: 1; transform: translateY(0); }
+
+  .timeline-left {
+    flex-shrink: 0;
+    width: 56px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 6px;
+  }
+
+  .timeline-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--teal);
+    border: 2px solid var(--cream);
+    box-shadow: 0 0 0 3px var(--teal);
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+  }
+
+  .timeline-year {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.85rem; /* était 0.75 */
+    font-weight: 600;
+    color: var(--teal);
+    letter-spacing: 0.05em;
+    margin-top: 10px;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+  }
+
+  .timeline-content {
+    flex: 1;
+    padding-bottom: 16px;
+  }
+
+  .timeline-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.45rem, 3vw, 1.9rem); /* était 1.3/1.7 */
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.25;
+    margin-bottom: 18px;
+  }
+
+  .timeline-heading em { font-style: italic; color: var(--teal); }
+
+  .timeline-body {
+    font-size: 1.25rem;
+    line-height: 1.95;
+    color: var(--text-mid);
+    font-weight: 400;
+  }
+
+  .timeline-body p + p { margin-top: 16px; }
+
+  .timeline-pull {
+    margin: 24px 0;
+    padding: 20px 24px;
+    border-left: 3px solid var(--gold);
+    background: rgba(201,169,110,0.06);
+    border-radius: 0 6px 6px 0;
+  }
+
+  .timeline-pull p {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.1rem; /* était 1rem */
+    color: var(--navy);
+    line-height: 1.65;
+    margin: 0 !important;
+  }
+
+  /* DARK SECTION — Bernard */
+  .dark-section {
+    background: var(--navy);
+    padding: 80px 24px;
+    margin: 0;
+  }
+
+  .dark-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .dark-label {
+    font-size: 0.88rem; /* était 0.72 */
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 32px;
+    font-weight: 400;
+  }
+
+  .dark-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.55rem, 3.5vw, 2.2rem); /* était 1.4/2 */
+    color: var(--white);
+    line-height: 1.3;
+    margin-bottom: 28px;
+  }
+
+  .dark-body {
+    font-size: 1.25rem;
+    line-height: 2.0;
+    color: rgba(255,255,255,0.85);
+    font-weight: 400;
+  }
+
+  .dark-body p + p { margin-top: 18px; }
+
+  .dark-highlight {
+    color: rgba(255,255,255,0.95);
+    font-weight: 400;
+  }
+
+  .dark-quote {
+    margin-top: 36px;
+    padding: 24px 28px;
+    border: 1px solid rgba(201,169,110,0.3);
+    border-radius: 8px;
+    background: rgba(255,255,255,0.04);
+  }
+
+  .dark-quote p {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.15rem; /* était 1.05 */
+    color: rgba(255,255,255,0.9);
+    line-height: 1.7;
+    margin-bottom: 10px;
+  }
+
+  .dark-quote cite {
+    font-size: 0.88rem; /* était 0.75 */
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  /* CONCLUSION */
+  .conclusion-section {
+    padding: 100px 24px;
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .conclusion-eyebrow {
+    font-size: 0.9rem; /* était 0.75 */
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 32px;
+    font-weight: 400;
+  }
+
+  .conclusion-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3rem); /* légèrement augmenté */
+    color: var(--navy);
+    line-height: 1.25;
+    margin-bottom: 28px;
+  }
+
+  .conclusion-heading em { font-style: italic; color: var(--teal); }
+
+  .conclusion-body {
+    font-size: 1.25rem;
+    line-height: 1.95;
+    color: var(--text-mid);
+    font-weight: 400;
+    margin-bottom: 20px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .conclusion-final {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.2rem; /* était 1.1 */
+    color: var(--navy);
+    line-height: 1.75;
+    margin: 36px auto 48px;
+    max-width: 520px;
+    padding: 24px;
+    border-top: 1px solid rgba(30,107,94,0.2);
+    border-bottom: 1px solid rgba(30,107,94,0.2);
+  }
+
+  .signature {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.1rem; /* était 1rem */
+    color: var(--teal);
+    margin-bottom: 56px;
+  }
+
+  /* CTA */
+  .cta-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 18px 44px;
+    background: var(--teal);
+    color: var(--white);
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem; /* était 0.85 */
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 60px;
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 8px 30px rgba(30,107,94,0.25);
+  }
+
+  .btn-primary:hover {
+    background: var(--teal-light);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(30,107,94,0.35);
+  }
+
+  .btn-secondary {
+    display: inline-block;
+    padding: 14px 36px;
+    border: 1.5px solid var(--navy);
+    color: var(--navy);
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    font-size: 0.92rem; /* était 0.82 */
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 60px;
+    transition: all 0.3s ease;
+  }
+
+  .btn-secondary:hover { background: var(--navy); color: var(--white); }
+
+  /* FOOTER */
+  .footer {
+    background: var(--navy);
+    padding: 40px 24px;
+    text-align: center;
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; /* était 1rem */
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .footer-sub {
+    font-size: 0.85rem; /* était 0.75 */
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.1em;
+  }
+
+  /* DIVIDER */
+  .divider {
+    width: 48px;
+    height: 2px;
+    background: var(--gold);
+    margin: 0 auto 40px;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scrollLine {
+    0%, 100% { opacity: 1; transform: scaleY(1); }
+    50% { opacity: 0.3; transform: scaleY(0.5); }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    body { font-size: 16px; }
+    .timeline::before { left: 20px; }
+    .timeline-left { width: 40px; }
+    .timeline-item { gap: 24px; }
+    .timeline-year { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">Méthode 3+1 IGBas® · Marie-Laure &amp; Bernard</p>
+  <h1 class="hero-title">Notre <em>Histoire</em></h1>
+  <p class="hero-subtitle">45 ans de vie commune. Une méthode née de la vraie vie.</p>
+  <blockquote class="hero-quote">
+    <p>« Ton passé ne peut disparaître. Ta manière de le gérer forgera ton quotidien et ton avenir. »</p>
+    <cite>Bernard — 19 janvier 1981</cite>
+  </blockquote>
+  <div class="scroll-cue">
+    <span>Découvrir</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline-section">
+  <p class="section-label">Mon histoire · Mes combats · Ma force</p>
+
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-left">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">1981</div>
+      </div>
+      <div class="timeline-content">
+        <h2 class="timeline-heading">Je suis née à <em>25 ans</em></h2>
+        <div class="timeline-body">
+          <p>Divorcée, mère de deux enfants — Elvire et Cédric — j'ai rencontré Bernard, celui qui allait devenir mon mari, mon pilier. Ensemble, nous avons construit une famille de quatre enfants, des entreprises, et une vie faite de tempêtes et de moments de grâce.</p>
+          <p>Ma force n'est pas une nouveauté marketing. Elle est le fruit de 45 années de vie, d'une expérience solide en Relations Humaines, et d'une écoute attentive de personnes aux besoins uniques.</p>
+          <div class="timeline-pull">
+            <p>Ma force, c'est mon vécu, mes combats, mes doutes et mes convictions. C'est chaque rencontre qui m'a forgée, endurcie… et transformée.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-left">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">1988</div>
+      </div>
+      <div class="timeline-content">
+        <h2 class="timeline-heading">La perte <em>de moi-même</em></h2>
+        <div class="timeline-body">
+          <p>Après notre mariage en 1987, un drame brutal est venu tout fracasser : la disparition de mon jeune frère, 26 ans, emporté par le SIDA. Un choc dont je ne mesurais pas encore l'amplitude.</p>
+          <p>L'année suivante, une grossesse non planifiée. 30 kilos pris. Une dépression sévère s'est installée, silencieuse et dévastatrice. Je me suis éloignée de ma famille, de mes enfants, de Bernard. Ma santé s'est dégradée : cholestérol, hypertension, pré-diabète.</p>
+          <div class="timeline-pull">
+            <p>Ces kilos n'étaient pas le vrai problème. Ils n'étaient que les symptômes d'une douleur bien plus ancienne.</p>
+          </div>
+          <p>Certains sortent debout des coups durs. D'autres, comme moi, trouvent refuge dans la nourriture, le déni — sans même s'en rendre compte. Mon passé était là, tapi dans l'ombre.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-left">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">1989</div>
+      </div>
+      <div class="timeline-content">
+        <h2 class="timeline-heading">Les ombres <em>du passé</em></h2>
+        <div class="timeline-body">
+          <p>Il m'a fallu des années pour réaliser à quel point je m'étais perdue. C'est Bernard qui m'a aidée à comprendre que ces kilos — devenus dangereux autant que visibles — n'étaient que la manifestation d'un mal-être bien plus ancien.</p>
+          <p>Avec patience et amour, Bernard m'a accompagnée pour faire face à mon passé — un passé marqué par une adolescence abusée, des blessures invisibles, une confiance en moi mise en miettes.</p>
+          <div class="timeline-pull">
+            <p>« Ce n'est pas ce qui t'est arrivé le problème — c'est ce que tu en fais. »</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-left">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2006</div>
+      </div>
+      <div class="timeline-content">
+        <h2 class="timeline-heading">Mon retour <em>à moi</em></h2>
+        <div class="timeline-body">
+          <p>Déterminée à reprendre le contrôle, j'ai tout testé : régimes hyperprotéinés, soupes miracles, coupe-faim dangereux. Rien de durable. Parce que je traitais les symptômes sans jamais toucher aux causes.</p>
+          <p>Et puis, progressivement, j'ai trouvé mon chemin.</p>
+          <div class="timeline-pull">
+            <p>40 kilos perdus. Jamais repris. Cholestérol, hypertension, pré-diabète — tout rentré dans l'ordre. Et surtout : la confiance retrouvée.</p>
+          </div>
+          <p>Grâce à cette transformation, j'ai pu être opérée des deux hanches en 2008 et 2009, sans risque. Bernard avait raison. Mon passé n'avait pas disparu. Mais j'avais enfin appris à le gérer.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-left">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2010</div>
+      </div>
+      <div class="timeline-content">
+        <h2 class="timeline-heading">La naissance <em>de la Méthode</em></h2>
+        <div class="timeline-body">
+          <p>Tout a commencé en 1989, lors d'un séminaire à Paris, où nous avons rencontré Michel Montignac — pionnier de l'indice glycémique. J'ai testé. L'efficacité était indéniable. Mais je retombais dans mes travers.</p>
+          <div class="timeline-pull">
+            <p>« Tant que la tête n'est pas en accord avec le corps, rien ne tient. »</p>
+          </div>
+          <p>Nous sommes partis à la rencontre de chercheurs, de spécialistes, de pionniers du bien-vivre. Nous avons construit une base solide, scientifique et humaine — en y ajoutant la recherche des causes profondes. Ce que personne ne faisait vraiment.</p>
+          <p>Pendant 8 ans en Martinique, notre Table SIDSanté bio est devenue le laboratoire vivant de la méthode. Une méthode née de la vie. Pas des livres.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- BERNARD — dark section -->
+<section class="dark-section">
+  <div class="dark-inner">
+    <p class="dark-label">Bernard prend la parole</p>
+    <h2 class="dark-heading">Aujourd'hui c'est moi qui me bats.</h2>
+    <div class="dark-body">
+      <p>J'ai toujours été le pilier. Celui qui tient. Celui qui encourage. Pendant 45 ans j'ai vu Marie-Laure se battre, tomber, se relever. Et gagner.</p>
+      <p>Depuis notre retour de Martinique en 2021 — un stress violent, une situation difficile. Mon corps a payé le prix. <span class="dark-highlight">Un canal rachidien rétréci. Je perds progressivement l'usage de mes jambes.</span></p>
+      <p>Je pourrais baisser les bras. Me dire que c'est fini, que c'est trop compliqué. Mais je ne le fais pas. Parce que la Méthode IGBas® est là. Elle ne fait pas de miracles contre tout — mais elle m'empêche de couler. Je stabilise. Et ça — avec tout ce que mon corps traverse — c'est une victoire énorme.</p>
+    </div>
+    <div class="dark-quote">
+      <p>« L'alimentation seule ne suffit pas toujours. Mais elle reste votre meilleure armure. »</p>
+      <cite>Bernard Bourdaudhui</cite>
+    </div>
+  </div>
+</section>
+
+<!-- CONCLUSION -->
+<section class="conclusion-section">
+  <p class="conclusion-eyebrow">2026 — Nous revenons</p>
+  <div class="divider"></div>
+  <h2 class="conclusion-heading">Notre force,<br>c'est <em>votre histoire</em></h2>
+
+  <p class="conclusion-body">En 2021 nous avons quitté la Martinique. Rentré en métropole. La retraite. Le calme. Et très vite — l'ennui de ceux qui ont besoin des autres pour vivre pleinement.</p>
+
+  <p class="conclusion-body">Nous ne savons pas ne pas être utiles. C'est plus fort que nous.</p>
+
+  <p class="conclusion-body">45 ans de vie commune. Des entreprises construites ensemble. 8 ans de Table SIDSanté bio. Une méthode qui a changé notre vie — et celle de centaines de personnes. Tout ça ne pouvait pas rester dans un tiroir.</p>
+
+  <blockquote class="conclusion-final">
+    Si vous vous reconnaissez dans une partie de cette histoire — même un fragment — sachez que vous n'êtes pas seul(e). Votre passé ne peut pas disparaître. Mais votre manière de le gérer peut tout changer.
+  </blockquote>
+
+  <p class="signature">Marie-Laure &amp; Bernard 🌿</p>
+
+  <div class="cta-block">
+    <a href="https://www.methode-igbas.fr/index.html" class="btn-primary">Découvrir la Méthode 3+1 IGBas®</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p class="footer-logo">Méthode 3+1 IGBas®</p>
+  <p class="footer-sub">methode-igbas.fr · Bien-être &amp; Liberté</p>
+</footer>
+
+<script>
+  const items = document.querySelectorAll('.timeline-item');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => { entry.target.classList.add('visible'); }, 100);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  items.forEach(item => observer.observe(item));
+</script>
+
+</body>
+</html>
